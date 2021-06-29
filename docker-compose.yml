@@ -1,0 +1,20 @@
+version: "2.1"
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: 'rabbitmq'
+    ports:
+      - 15672:15672
+      - 5672:5672
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ~/docker-volumes/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/docker-volumes/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - esnet
+volumes:
+  esdata1:
+    driver: local
+networks:
+  esnet:

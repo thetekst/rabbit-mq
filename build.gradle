@@ -1,0 +1,77 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.11.RELEASE' apply false
+    id 'groovy'
+}
+ext {
+    spockVersion = '1.3-groovy-2.5'
+    jacksonVer = '2.11.0'
+}
+
+subprojects {
+    group = 'ru.tkachenko.rabbit.mq.app'
+    version = '1.0.0'
+
+    apply plugin: 'groovy'
+    apply plugin: 'maven-publish'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = 11
+
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+        }
+    }
+
+    dependencies {
+        compile 'org.springframework.boot:spring-boot-starter-amqp'
+        compile 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
+        implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVer}"
+
+        compileOnly 'org.projectlombok:lombok'
+        runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+        annotationProcessor 'org.projectlombok:lombok'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation "org.spockframework:spock-core:${spockVersion}"
+        testImplementation "org.spockframework:spock-spring:${spockVersion}"
+    }
+}
+
+def appConfig = {
+    apply plugin: 'org.springframework.boot'
+
+    dependencies {
+
+    }
+}
+
+project(':sender', appConfig << {
+    dependencies {
+        implementation project(':common')
+
+    }
+})
+
+project(':receiver', appConfig << {
+    dependencies {
+        implementation project(':common')
+
+    }
+})
+
+project(':common') {
+    dependencies {
+
+    }
+}

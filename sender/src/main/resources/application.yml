@@ -1,0 +1,6 @@
+app.rabbit:
+  queueName: q1
+  exchange: e1
+  routingKey: rk1
+
+server.port: 8080
