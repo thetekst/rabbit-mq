@@ -8,7 +8,8 @@ user: guest
 
 pass: guest
 
-run sender app
-run receiver app
+1. run sender app
+
+2. run receiver app
 
 send message to: http://localhost:8080/amqp/send?exchangeName=e1&routingKey=rk1&messageData=ms
