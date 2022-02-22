@@ -1,6 +1,10 @@
 app.rabbit:
-  queueName: q1
-  exchange: e1
-  routingKey: rk1
+  queueName: queueNameTest
+  exchange: exchangeTest
+  routingKey: routingKeyTest
 
 server.port: 8080
+
+spring:
+  rabbitmq:
+    host: 192.168.1.105 # RabbitMQ host.

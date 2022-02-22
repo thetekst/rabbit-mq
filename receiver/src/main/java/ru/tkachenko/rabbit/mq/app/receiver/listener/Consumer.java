@@ -18,7 +18,7 @@ public class Consumer {
     @RabbitListener(queues = "#{appRabbitProperties.queueName}", concurrency = "3")
     public TestResponse receive(TestRequest testRequest) {
         log.info("receiver listener: {}", testRequest);
-        return new TestResponse(testRequest.getName());
+        return new TestResponse(testRequest.getFirstName());
     }
 
 }

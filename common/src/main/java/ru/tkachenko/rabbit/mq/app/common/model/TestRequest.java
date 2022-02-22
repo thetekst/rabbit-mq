@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TestRequest {
 
-    private String name;
+    private String firstName;
 
 }
